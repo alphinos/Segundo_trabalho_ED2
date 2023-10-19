@@ -1,12 +1,17 @@
 package Estrutura;
 
+import sort.Sorter;
+
 public class Table< Key > {
-    private Generic< Key, ?> registers[];
+    private Generic< Key, ?>[] registers;
     private int size;
 
+    private boolean ordered;
+
     public Table( int max_size ){
-        this.registers = new Generic[max_size];
+        this.registers = new Generic[ max_size ];
         this.size = 0;
+        this.ordered = false;
     }
 
     public Generic< Key, ? > search( Key key ){
@@ -16,6 +21,32 @@ public class Table< Key > {
             }
         }
         return null;
+    }
+
+    // Busca binária: retorna o índe do item encontrado
+    public int binarySearch( Key key ) throws Exception {
+        if ( this.ordered == false ){
+            throw new Exception( "Table must be ordered" );
+        }
+
+        if ( this.size == 0 ){
+            return -1;
+        }
+
+        Generic< Key, ? > aux = new Generic<>( key, null );
+
+        int left = 1, right = this.size, i;
+
+        do {
+            i = ( left + right ) / 2;
+            if ( aux.compareTo( this.registers[ i ] ) > 0 )
+                left = i + 1;
+            else
+                right = i - 1;
+        } while ( aux.compareTo( this.registers[ i ] ) != 0 && left < right );
+
+        if ( aux.compareTo( this.registers[ i ] ) == 0 ) return i;
+        else return -1;
     }
 
     public void insert( Generic< Key, ? > word ) throws Exception {
@@ -42,5 +73,15 @@ public class Table< Key > {
         }
         this.size--;
         return removed;
+    }
+
+    public void setOrdered( Sorter sorter ){
+        sorter.sort( ( Generic< ?, ? >[] ) this.registers );
+        for ( int i = 0; i + 1 < this.size; i++ ){
+            if ( this.registers[ i + 1 ].compareTo( this.registers[ i ] ) < 0 ){
+                return;
+            }
+        }
+        this.ordered = true;
     }
 }
