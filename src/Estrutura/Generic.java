@@ -31,7 +31,11 @@ public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fon
         } else if ( this.key instanceof  String && o.getKey() instanceof  String ){
             return ((String) this.key).compareTo((String) o.getKey() );
         } else {
-            throw ;
+            try {
+                throw new Exception( "Type not accepted" );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
