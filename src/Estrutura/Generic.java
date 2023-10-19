@@ -1,8 +1,8 @@
 package Estrutura;
 
 public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fonte: https://github.com/uotlaf/ED2-Atividade1/blob/master/src/Estruturas/Generico.java
-    private final Key key;
-    private final Value value;
+    private Key key;
+    private Value value;
 
     public Generic(Key key, Value value) {
         this.key = key;
@@ -15,6 +15,14 @@ public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fon
 
     public Value getValue() {
         return this.value;
+    }
+
+    public void setKey( Key key ){
+        this.key = key;
+    }
+
+    public void setValue( Value value ){
+        this.value = value;
     }
 
     @Override
