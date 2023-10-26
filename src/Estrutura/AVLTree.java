@@ -1,21 +1,23 @@
 package Estrutura;
 
-class tNode{
+class AVLNode{
     private Generic<?,?> data;
 
-    private tNode father;
-    private tNode left;
+    private AVLNode father;
+    private AVLNode left;
 
-    private tNode right;
+    private AVLNode right;
 
-    public tNode( Generic<?,?> data ){
+    private int height;
+
+    public AVLNode( Generic<?,?> data ){
         this.data = data;
         this.father = null;
         this.left = null;
         this.right = null;
     }
 
-    public tNode( Object key, Object value ){
+    public AVLNode( Object key, Object value ){
         this.data = new Generic<>( key, value );
         this.father = null;
         this.left = null;
@@ -26,85 +28,75 @@ class tNode{
         return this.data;
     }
 
-    public tNode getFather() {
+    public AVLNode getFather() {
         return this.father;
     }
 
-    public tNode getLeft() {
+    public AVLNode getLeft() {
         return this.left;
     }
 
-    public tNode getRight() {
+    public AVLNode getRight() {
         return this.right;
+    }
+
+    public int getHeight(){
+        return this.height;
     }
 
     public void setData(Generic<?, ?> data) {
         this.data = data;
     }
 
-    public void setFather(tNode father) {
+    public void setFather(AVLNode father) {
         this.father = father;
     }
 
-    public void setLeft(tNode left) {
+    public void setLeft(AVLNode left) {
         this.left = left;
     }
 
-    public void setRight(tNode right) {
+    public void setRight(AVLNode right) {
         this.right = right;
+    }
+
+    public void setHeight( int height ){
+        this.height = height;
     }
 }
 
-public class BinarySeachTree {
-    private tNode root;
+public class AVLTree {
+    private AVLNode root;
 
-    public BinarySeachTree( Object key, Object value ){
-        this.root = new tNode( key, value );
-    }
-
-    public BinarySeachTree( Generic<?, ?> data ){
-        this.root = new tNode( data );
-    }
-
-    public tNode getRoot() {
-        return root;
-    }
-
-    public void setRoot(tNode root) {
-        this.root = root;
-    }
-
-    public void insert( Object key, Object value ){
+    public AVLNode insert( Object key, Object value, AVLNode t ){
         Generic<?, ?> data = new Generic<>( key, value );
-        tNode current = this.root;
-        while ( current != null ){
-            if ( data.compareTo( current.getData() ) <= 0 ){
-                if ( current.getLeft() == null )
-                    break;
-                current = current.getLeft();
-            } else {
-                if ( current.getRight() == null )
-                    break;
-                current = current.getRight();
+        AVLNode current = this.root;
+        if ( t == null ){
+            t = new AVLNode( data );
+        } else if ( data.compareTo( t.getData() ) < 0 ) {
+            t.setLeft( this.insert( key, value, t ) );
+            if ( t.getLeft().getHeight() - t.getRight().getHeight() == 2 ){
+                if ( data.compareTo( t.getLeft().getData() ) < 0 )
+                    t = leftRotation( t );
+                else
+                    t = rightRotation( t );
+            }
+        } else if ( data.compareTo( t.getData() ) > 0 ){
+            t.setRight( this.insert( key, value, t ) );
+            if ( t.getRight().getHeight() - t.getLeft().getHeight() == 2 ){
+                if ( data.compareTo( t.getRight().getData() ) < 0 )
+                    t = leftRotation( t );
+                else
+                    t = rightRotation( t );
             }
         }
-
-        tNode newnode = new tNode( data );
-
-        if ( current == null ) {
-            this.root = newnode;
-        } else {
-            if ( data.compareTo( current.getData() ) <= 0 )
-                current.setLeft( newnode );
-            else
-                current.setRight( newnode );
-            newnode.setFather( current );
-        }
+        t.setHeight( Math.max( t.getLeft().getHeight(), t.getRight().getHeight() ) + 1 );
+        return t;
     }
 
     public Generic<?, ?> query( Object key ){
         Generic<?, ?> data = new Generic<>( key, null );
-        tNode current = this.root;
+        AVLNode current = this.root;
         int cmp;
         while ( current != null ){
             cmp = data.compareTo( current.getData() );
@@ -121,8 +113,8 @@ public class BinarySeachTree {
 
     public Generic<?, ?> remove( Object key ){
         Generic<?, ?> dataKey = new Generic<>( key, null );
-        tNode current = this.root;
-        tNode father;
+        AVLNode current = this.root;
+        AVLNode father;
         int cmp;
 
         Generic<?, ?> data;
@@ -174,9 +166,9 @@ public class BinarySeachTree {
         return this.removeGreater( this.root );
     }
 
-    public Generic<?, ?> removeGreater( tNode t ){
-        tNode current = t;
-        tNode aux;
+    public Generic<?, ?> removeGreater( AVLNode t ){
+        AVLNode current = t;
+        AVLNode aux;
         Generic<?, ?> data;
         while ( current != null ){
             if ( current.getRight() != null ){
@@ -200,5 +192,45 @@ public class BinarySeachTree {
             }
         }
         return null;
+    }
+
+    private AVLNode rightRotation( AVLNode node ){
+        AVLNode leftNode = node.getLeft();
+        node.setLeft( leftNode.getRight() );
+        leftNode.setRight( node );
+        node.setHeight(
+                Math.max( node.getLeft().getHeight(),
+                        node.getRight().getHeight() ) + 1
+        );
+        leftNode.setHeight(
+                Math.max( leftNode.getLeft().getHeight(),
+                        node.getHeight() ) + 1
+        );
+        return leftNode;
+    }
+
+    private AVLNode leftRotation( AVLNode node ){
+        AVLNode rightNode = node.getRight();
+        node.setRight( rightNode.getLeft() );
+        rightNode.setLeft( node );
+        node.setHeight(
+                Math.max( node.getLeft().getHeight(),
+                        node.getRight().getHeight() ) + 1
+        );
+        rightNode.setHeight(
+                Math.max( rightNode.getRight().getHeight(),
+                        node.getHeight() ) + 1
+        );
+        return rightNode;
+    }
+
+    private AVLNode doubleRightRotation( AVLNode node ){
+        node.setLeft( this.leftRotation( node.getLeft() ) );
+        return this.rightRotation( node );
+    }
+
+    private AVLNode doubleLeftRotation( AVLNode node ){
+        node.setRight( this.rightRotation( node.getRight() ) );
+        return this.rightRotation( node );
     }
 }
