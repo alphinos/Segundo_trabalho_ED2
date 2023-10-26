@@ -4,6 +4,8 @@ import sort.Sorter;
 
 public class Table< Key > {
     private Generic< Key, ?>[] registers;
+    private Key[] keys;
+    private Object[] values;
     private int size;
 
     private boolean ordered;
@@ -14,7 +16,15 @@ public class Table< Key > {
         this.ordered = false;
     }
 
-    public Generic< Key, ? > search( Key key ){
+    public Key[] getKeys(){
+        return this.keys;
+    }
+
+    public Object[] getValues(){
+        return this.values;
+    }
+
+    public Generic< Key, ? > search(Key key){
         for ( Generic< Key, ? > word : this.registers ){
             if ( word.getKey() == key ) {
                 return word;
@@ -25,7 +35,7 @@ public class Table< Key > {
 
     // Busca binária: retorna o índe do item encontrado
     public int binarySearch( Key key ) throws Exception {
-        if ( this.ordered == false ){
+        if ( !this.ordered ){
             throw new Exception( "Table must be ordered" );
         }
 
@@ -54,9 +64,11 @@ public class Table< Key > {
             throw new Exception( "Table is full" );
         }
         this.registers[ ++this.size ] = word;
+        this.keys[ this.size ] = word.getKey();
+        this.values[ this.size ] = word.getValue();
     }
 
-    public Generic< Key, ? > remove( Key key ){
+    public Generic< Key, ? > remove( Key key ) throws Exception{
         int i;
         Generic< Key, ? > removed = null;
         for ( i = 0; i < this.size; i++ ){
@@ -66,10 +78,12 @@ public class Table< Key > {
             }
         }
         if ( removed == null ){
-            return null;
+            throw new Exception( "Item not found" );
         }
         for ( int j = i + 1; j < this.size; j++ ){
             this.registers[ j - 1 ] = this.registers[ j ];
+            this.keys[ j - 1 ] = this.keys[ j ];
+            this.values[ j - 1 ] = this.values[ j ];
         }
         this.size--;
         return removed;
