@@ -5,7 +5,6 @@ public class HashTable {
     private int size;
     private final int max_size;
 
-
     public HashTable( int max_size ){
         this.registers = new List[ max_size ];
         for ( List l : registers ){
