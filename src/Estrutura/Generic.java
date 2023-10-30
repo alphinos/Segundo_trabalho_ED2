@@ -17,12 +17,14 @@ public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fon
         return this.value;
     }
 
-    public void setKey( Key key ){
-        this.key = key;
+    public void setKey( Object key ){
+        if (key != null)
+            this.key = (Key) key;
     }
 
-    public void setValue( Value value ){
-        this.value = value;
+    public void setValue( Object value ){
+        if (value != null)
+            this.value = (Value) value;
     }
 
     @Override

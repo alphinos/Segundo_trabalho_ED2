@@ -54,10 +54,12 @@ class AVLNode{
 
     public void setLeft(AVLNode left) {
         this.left = left;
+        left.setFather( this );
     }
 
     public void setRight(AVLNode right) {
         this.right = right;
+        left.setFather( this );
     }
 
     public void setHeight( int height ){

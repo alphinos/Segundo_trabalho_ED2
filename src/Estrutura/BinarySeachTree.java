@@ -126,7 +126,6 @@ public class BinarySeachTree {
         int cmp;
 
         Generic<?, ?> data;
-        Generic<?, ?> data2;
 
         while ( current != null ){
             cmp = dataKey.compareTo( current.getData() );
