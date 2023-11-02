@@ -1,14 +1,14 @@
 package Estrutura;
 
 class tNode{
-    private Generic<?,?> data;
+    private Pair<?,?> data;
 
     private tNode father;
     private tNode left;
 
     private tNode right;
 
-    public tNode( Generic<?,?> data ){
+    public tNode( Pair<?,?> data ){
         this.data = data;
         this.father = null;
         this.left = null;
@@ -16,13 +16,13 @@ class tNode{
     }
 
     public tNode( Object key, Object value ){
-        this.data = new Generic<>( key, value );
+        this.data = new Pair<>( key, value );
         this.father = null;
         this.left = null;
         this.right = null;
     }
 
-    public Generic<?, ?> getData() {
+    public Pair<?, ?> getData() {
         return this.data;
     }
 
@@ -38,7 +38,7 @@ class tNode{
         return this.right;
     }
 
-    public void setData(Generic<?, ?> data) {
+    public void setData(Pair<?, ?> data) {
         this.data = data;
     }
 
@@ -62,7 +62,7 @@ public class BinarySeachTree {
         this.root = new tNode( key, value );
     }
 
-    public BinarySeachTree( Generic<?, ?> data ){
+    public BinarySeachTree( Pair<?, ?> data ){
         this.root = new tNode( data );
     }
 
@@ -75,7 +75,7 @@ public class BinarySeachTree {
     }
 
     public void insert( Object key, Object value ){
-        Generic<?, ?> data = new Generic<>( key, value );
+        Pair<?, ?> data = new Pair<>( key, value );
         tNode current = this.root;
         while ( current != null ){
             if ( data.compareTo( current.getData() ) <= 0 ){
@@ -102,8 +102,8 @@ public class BinarySeachTree {
         }
     }
 
-    public Generic<?, ?> query( Object key ){
-        Generic<?, ?> data = new Generic<>( key, null );
+    public Pair<?, ?> query(Object key ){
+        Pair<?, ?> data = new Pair<>( key, null );
         tNode current = this.root;
         int cmp;
         while ( current != null ){
@@ -119,13 +119,13 @@ public class BinarySeachTree {
         return null;
     }
 
-    public Generic<?, ?> remove( Object key ){
-        Generic<?, ?> dataKey = new Generic<>( key, null );
+    public Pair<?, ?> remove(Object key ){
+        Pair<?, ?> dataKey = new Pair<>( key, null );
         tNode current = this.root;
         tNode father;
         int cmp;
 
-        Generic<?, ?> data;
+        Pair<?, ?> data;
 
         while ( current != null ){
             cmp = dataKey.compareTo( current.getData() );
@@ -169,14 +169,14 @@ public class BinarySeachTree {
         return null;
     }
 
-    public Generic<?, ?> removeGreater(  ){
+    public Pair<?, ?> removeGreater(  ){
         return this.removeGreater( this.root );
     }
 
-    public Generic<?, ?> removeGreater( tNode t ){
+    public Pair<?, ?> removeGreater(tNode t ){
         tNode current = t;
         tNode aux;
-        Generic<?, ?> data;
+        Pair<?, ?> data;
         while ( current != null ){
             if ( current.getRight() != null ){
                 current = current.getRight();

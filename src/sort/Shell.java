@@ -1,6 +1,6 @@
 package sort;
 
-import Estrutura.Generic;
+import Estrutura.Pair;
 
 public class Shell extends Sorter {
 
@@ -10,12 +10,12 @@ public class Shell extends Sorter {
     }
 
     @Override
-    public void sort(Generic<?, ?>[] vector) {
+    public void sort(Pair<?, ?>[] vector) {
         this.vector_size = vector.length;
 
         int h, j;
 
-        Generic<?, ?> temp;
+        Pair<?, ?> temp;
 
         for ( h = 1; h < vector.length; h = ( 2 * h ) + 1 ){
             this.movements++; this.comparisons++; this.movements++;
@@ -42,12 +42,12 @@ public class Shell extends Sorter {
     }
 
     @Override
-    public void invertedSort(Generic<?, ?>[] vector) {
+    public void invertedSort(Pair<?, ?>[] vector) {
         this.vector_size = vector.length;
 
         int h, j;
 
-        Generic<?, ?> temp;
+        Pair<?, ?> temp;
 
         for ( h = 1; h < vector.length; h = ( 2 * h ) + 1 ){
             this.movements++; this.comparisons++; this.movements++;

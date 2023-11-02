@@ -1,10 +1,10 @@
 package Estrutura;
 
-public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fonte: https://github.com/uotlaf/ED2-Atividade1/blob/master/src/Estruturas/Generico.java
+public class Pair<Key, Value> implements Comparable<Pair<?, ?>> { // Fonte: https://github.com/uotlaf/ED2-Atividade1/blob/master/src/Estruturas/Generico.java
     private Key key;
     private Value value;
 
-    public Generic(Key key, Value value) {
+    public Pair(Key key, Value value) {
         this.key = key;
         this.value = value;
     }
@@ -17,12 +17,12 @@ public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fon
         return this.value;
     }
 
-    public void setKey( Object key ){
+    public void setKey( Key key ){
         if (key != null)
             this.key = (Key) key;
     }
 
-    public void setValue( Object value ){
+    public void setValue( Value value ){
         if (value != null)
             this.value = (Value) value;
     }
@@ -32,7 +32,7 @@ public class Generic<Key, Value> implements Comparable< Generic<?, ?> > { // Fon
         return "{ " + this.key + " : " + this.value + " }";
     }
 
-    public int compareTo(Generic<?, ?> o) {
+    public int compareTo(Pair<?, ?> o) {
         // Teste do tipo do valor object
         if (this.key instanceof Integer && o.getKey() instanceof  Integer ) {
             return ((Integer) this.key).compareTo((Integer) o.getKey() );

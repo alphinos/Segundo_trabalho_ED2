@@ -7,28 +7,28 @@ public class HashTable {
 
     public HashTable( int max_size ){
         this.registers = new List[ max_size ];
-        for ( List l : registers ){
-            l = new List();
-        }
         this.max_size = max_size;
         this.size = 0;
     }
 
     public void insert( Object key, Object value ){
-        Generic<?,?> data = new Generic<>(key, value);
+        Pair<?,?> data = new Pair<>(key, value);
         int index = hash( key );
+        if ( registers[index] == null ){
+            registers[index] = new List();
+        }
         registers[ index ].insert( data );
         size++;
     }
 
-    public Generic<?, ?> query( Object key ){
+    public Pair<?, ?> query(Object key ){
         int index = hash( key );
         return registers[ index ].query( key );
     }
 
-    public Generic<?, ?> remove( Object key ){
+    public Pair<?, ?> remove(Object key ){
         int index = hash( key );
-        Generic<?, ?> aux = registers[ index ].remove( key );
+        Pair<?, ?> aux = registers[ index ].remove( key );
         if ( aux != null )
             size--;
         return aux;

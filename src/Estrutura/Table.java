@@ -3,7 +3,7 @@ package Estrutura;
 import sort.Sorter;
 
 public class Table< Key > {
-    private Generic< Key, ?>[] registers;
+    private final Pair< Key, ?>[] registers;
     private Key[] keys;
     private Object[] values;
     private int size;
@@ -11,7 +11,7 @@ public class Table< Key > {
     private boolean ordered;
 
     public Table( int max_size ){
-        this.registers = new Generic[ max_size ];
+        this.registers = new Pair[ max_size ];
         this.size = 0;
         this.ordered = false;
     }
@@ -24,8 +24,8 @@ public class Table< Key > {
         return this.values;
     }
 
-    public Generic< Key, ? > search(Key key){
-        for ( Generic< Key, ? > word : this.registers ){
+    public Pair< Key, ? > search(Key key){
+        for ( Pair< Key, ? > word : this.registers ){
             if ( word.getKey() == key ) {
                 return word;
             }
@@ -43,7 +43,7 @@ public class Table< Key > {
             return -1;
         }
 
-        Generic< Key, ? > aux = new Generic<>( key, null );
+        Pair< Key, ? > aux = new Pair<>( key, null );
 
         int left = 1, right = this.size, i;
 
@@ -59,7 +59,7 @@ public class Table< Key > {
         else return -1;
     }
 
-    public void insert( Generic< Key, ? > word ) throws Exception {
+    public void insert( Pair< Key, ? > word ) throws Exception {
         if ( this.size == ( this.registers.length ) ){
             throw new Exception( "Table is full" );
         }
@@ -68,9 +68,9 @@ public class Table< Key > {
         this.values[ this.size ] = word.getValue();
     }
 
-    public Generic< Key, ? > remove( Key key ) throws Exception{
+    public Pair< Key, ? > remove(Key key ) throws Exception{
         int i;
-        Generic< Key, ? > removed = null;
+        Pair< Key, ? > removed = null;
         for ( i = 0; i < this.size; i++ ){
             if ( this.registers[ i ].getKey() == key ){
                 removed = this.registers[ i ];
@@ -89,12 +89,14 @@ public class Table< Key > {
         return removed;
     }
 
-    public void setOrdered( Sorter sorter ){
-        sorter.sort( ( Generic< ?, ? >[] ) this.registers );
+    public void sort( Sorter sorter ){
+        sorter.sort( this.registers );
         for ( int i = 0; i + 1 < this.size; i++ ){
             if ( this.registers[ i + 1 ].compareTo( this.registers[ i ] ) < 0 ){
                 return;
             }
+            this.keys[ i ] = this.registers[ i ].getKey();
+            this.values[ i ] = this.registers[ i ].getValue();
         }
         this.ordered = true;
     }

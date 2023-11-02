@@ -2,7 +2,7 @@ package Estrutura;
 
 class Node{
     private Node previous;
-    private Generic<?,?> data;
+    private Pair<?,?> data;
     private Node next;
 
     public Node(){
@@ -11,7 +11,7 @@ class Node{
         this.next = null;
     }
 
-    public Node( Generic<?,?> data ){
+    public Node( Pair<?,?> data ){
         this.previous = null;
         this.data = data;
         this.next = null;
@@ -21,7 +21,7 @@ class Node{
         return this.previous;
     }
 
-    public Generic<?,?> getData(){
+    public Pair<?,?> getData(){
         return this.data;
     }
 
@@ -33,7 +33,7 @@ class Node{
         this.previous = previous;
     }
 
-    public void setData( Generic<?,?> data ){
+    public void setData( Pair<?,?> data ){
         this.data = data;
     }
 
@@ -47,13 +47,13 @@ public class List {
 
     private int length;
 
-    public void push( Generic<?,?> data ){
+    public void push( Pair<?,?> data ){
         Node newnode = new Node( data );
         newnode.setNext( this.first );
         this.first = newnode;
     }
 
-    public void push( Generic<?,?> data, int index ) throws Exception{
+    public void push(Pair<?,?> data, int index ) throws Exception{
         if ( index < 0 || index > this.length )
             throw new Exception( "Index out of bounds" );
         if ( index == 0 )
@@ -70,13 +70,13 @@ public class List {
         Node next = current.getNext();
         previous.setNext( next );
     }
-    public Generic<?,?> pop(  ) throws Exception{
-        Generic<?,?> data = this.first.getData();
+    public Pair<?,?> pop(  ) throws Exception{
+        Pair<?,?> data = this.first.getData();
         this.first = first.getNext();
         this.first.setPrevious( null );
         return data;
     }
-    public Generic<?,?> pop( int index ) throws Exception{
+    public Pair<?,?> pop(int index ) throws Exception{
         if ( index < 0 || index > this.length )
             throw new Exception( "Index out of bounds" );
         if ( this.length == 0 )
@@ -98,20 +98,20 @@ public class List {
             this.last = previous;
         return current.getData();
     }
-    public Generic<?,?> getFirst(  ){
+    public Pair<?,?> getFirst(  ){
         if ( this.length == 0 )
             return null;
         return this.first.getData();
     }
 
-    public void insert( Generic<?,?> data ){
+    public void insert( Pair<?,?> data ){
         Node newnode = new Node( data );
         this.last.setNext( newnode );
         this.last = newnode;
     }
 
-    public Generic<?,?> query( Object key ) {
-        Generic<?,?> aux = new Generic<>( key, null );
+    public Pair<?,?> query(Object key ) {
+        Pair<?,?> aux = new Pair<>( key, null );
         Node current = this.first;
         while( current != null ){
             if ( current.getData().compareTo( aux ) == 0 )
@@ -121,8 +121,8 @@ public class List {
         return null;
     }
 
-    public Generic<?,?> remove( Object key ){
-        Generic<?,?> aux = new Generic<>( key, null );
+    public Pair<?,?> remove(Object key ){
+        Pair<?,?> aux = new Pair<>( key, null );
         Node current = this.first;
         while( current != null ){
             if ( current.getData().compareTo( aux ) == 0 )

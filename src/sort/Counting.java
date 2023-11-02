@@ -1,49 +1,49 @@
 package sort;
 
-import Estrutura.Generic;
+import Estrutura.Pair;
 
 public class Counting extends Sorter {
 
     @Override
-    public void sort(Generic<?, ?>[] vector) {
+    public void sort(Pair<?, ?>[] vector) {
         this.vector_size = vector.length;
         if ( !( vector[0].getValue() instanceof Integer ) ){
             System.out.println("O vetor deve ser de inteiros");
             return;
         }
-        for ( Generic<?, ?> e : vector ){
+        for ( Pair<?, ?> e : vector ){
             if ( (int) e.getValue() < 0 ){
                 System.out.println("O vetor deve ser inteiramente positivo");
                 return;
             }
         }
-        counting( ( Generic<?, Integer>[]) vector );
+        counting( ( Pair<?, Integer>[]) vector );
     }
 
     @Override
-    public void invertedSort(Generic<?, ?>[] vector) {
+    public void invertedSort(Pair<?, ?>[] vector) {
         this.vector_size = vector.length;
         if ( !( vector[0].getValue() instanceof Integer ) ){
             System.out.println("O vetor deve ser de inteiros");
             return;
         }
-        for ( Generic<?, ?> e : vector ){
+        for ( Pair<?, ?> e : vector ){
             if ( (int) e.getValue() < 0 ){
                 System.out.println("O vetor deve ser inteiramente positivo");
                 return;
             }
         }
-        invertedCounting( ( Generic<?, Integer>[]) vector );
+        invertedCounting( ( Pair<?, Integer>[]) vector );
     }
-    private void counting( Generic<?, Integer >[] vector){
+    private void counting( Pair<?, Integer >[] vector){
         int n = vector.length;
 
         // The output character array that will have sorted
         // arr
         int[] output = new int[n];
 
-        Generic< ?, Integer> bigger = vector[0];
-        for ( Generic< ?, Integer> i : vector ){
+        Pair< ?, Integer> bigger = vector[0];
+        for ( Pair< ?, Integer> i : vector ){
             if ( i.compareTo( bigger ) > 0 ){
                 bigger = i;
             }
@@ -57,7 +57,7 @@ public class Counting extends Sorter {
         }
 
         // store count of each character
-        for (Generic<?, Integer> integerGenerics : vector) {
+        for (Pair<?, Integer> integerGenerics : vector) {
             count[integerGenerics.getValue()]++;
         }
 
@@ -78,20 +78,20 @@ public class Counting extends Sorter {
         // Copy the output array to arr, so that arr now
         // contains sorted characters
         for (int i = 0; i < n; ++i){
-            Generic<?, Integer> copy= new Generic<>( vector[i].getKey(), output[i] );
+            Pair<?, Integer> copy= new Pair<>( vector[i].getKey(), output[i] );
             vector[i] = copy;
         }
     }
 
-    private void invertedCounting(Generic<?, Integer>[] vector){
+    private void invertedCounting(Pair<?, Integer>[] vector){
         int n = vector.length;
 
         // The output character array that will have sorted
         // arr
         int[] output = new int[n];
 
-        Generic< ?, Integer> bigger = vector[0];
-        for ( Generic< ?, Integer> i : vector ){
+        Pair< ?, Integer> bigger = vector[0];
+        for ( Pair< ?, Integer> i : vector ){
             if ( bigger.compareTo( i ) > 0 ){
                 bigger = i;
             }
@@ -105,7 +105,7 @@ public class Counting extends Sorter {
         }
 
         // store count of each character
-        for (Generic<?, Integer> integerGenerics : vector) {
+        for (Pair<?, Integer> integerGenerics : vector) {
             ++count[integerGenerics.getValue()];
         }
 
@@ -126,7 +126,7 @@ public class Counting extends Sorter {
         // Copy the output array to arr, so that arr now
         // contains sorted characters
         for (int i = 0; i < n; ++i){
-            Generic<?, Integer> copy= new Generic<>( vector[i].getKey(), output[i] );
+            Pair<?, Integer> copy= new Pair<>( vector[i].getKey(), output[i] );
             vector[i] = copy;
         }
     }

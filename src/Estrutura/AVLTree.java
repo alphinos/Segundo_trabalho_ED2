@@ -1,7 +1,7 @@
 package Estrutura;
 
 class AVLNode{
-    private Generic<?,?> data;
+    private Pair<?,?> data;
 
     private AVLNode father;
     private AVLNode left;
@@ -10,7 +10,7 @@ class AVLNode{
 
     private int height;
 
-    public AVLNode( Generic<?,?> data ){
+    public AVLNode( Pair<?,?> data ){
         this.data = data;
         this.father = null;
         this.left = null;
@@ -18,13 +18,13 @@ class AVLNode{
     }
 
     public AVLNode( Object key, Object value ){
-        this.data = new Generic<>( key, value );
+        this.data = new Pair<>( key, value );
         this.father = null;
         this.left = null;
         this.right = null;
     }
 
-    public Generic<?, ?> getData() {
+    public Pair<?, ?> getData() {
         return this.data;
     }
 
@@ -44,7 +44,7 @@ class AVLNode{
         return this.height;
     }
 
-    public void setData(Generic<?, ?> data) {
+    public void setData(Pair<?, ?> data) {
         this.data = data;
     }
 
@@ -71,7 +71,7 @@ public class AVLTree {
     private AVLNode root;
 
     public AVLNode insert( Object key, Object value, AVLNode t ){
-        Generic<?, ?> data = new Generic<>( key, value );
+        Pair<?, ?> data = new Pair<>( key, value );
         AVLNode current = this.root;
         if ( t == null ){
             t = new AVLNode( data );
@@ -96,8 +96,8 @@ public class AVLTree {
         return t;
     }
 
-    public Generic<?, ?> query( Object key ){
-        Generic<?, ?> data = new Generic<>( key, null );
+    public Pair<?, ?> query(Object key ){
+        Pair<?, ?> data = new Pair<>( key, null );
         AVLNode current = this.root;
         int cmp;
         while ( current != null ){
@@ -113,14 +113,14 @@ public class AVLTree {
         return null;
     }
 
-    public Generic<?, ?> remove( Object key ){
-        Generic<?, ?> dataKey = new Generic<>( key, null );
+    public Pair<?, ?> remove(Object key ){
+        Pair<?, ?> dataKey = new Pair<>( key, null );
         AVLNode current = this.root;
         AVLNode father;
         int cmp;
 
-        Generic<?, ?> data;
-        Generic<?, ?> data2;
+        Pair<?, ?> data;
+        Pair<?, ?> data2;
 
         while ( current != null ){
             cmp = dataKey.compareTo( current.getData() );
@@ -164,14 +164,14 @@ public class AVLTree {
         return null;
     }
 
-    public Generic<?, ?> removeGreater(  ){
+    public Pair<?, ?> removeGreater(  ){
         return this.removeGreater( this.root );
     }
 
-    public Generic<?, ?> removeGreater( AVLNode t ){
+    public Pair<?, ?> removeGreater(AVLNode t ){
         AVLNode current = t;
         AVLNode aux;
-        Generic<?, ?> data;
+        Pair<?, ?> data;
         while ( current != null ){
             if ( current.getRight() != null ){
                 current = current.getRight();

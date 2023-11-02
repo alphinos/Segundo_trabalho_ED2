@@ -1,5 +1,5 @@
 package sort;
-import Estrutura.Generic;
+import Estrutura.Pair;
 
 public abstract class Sorter {
     protected String name;
@@ -42,11 +42,11 @@ public abstract class Sorter {
         return this.vector_size;
     }
 
-    public abstract void sort(Generic<?, ?>[] vector );
+    public abstract void sort(Pair<?, ?>[] vector );
 
-    public abstract void invertedSort( Generic<?, ?>[] vector );
+    public abstract void invertedSort( Pair<?, ?>[] vector );
 
-    public void sort( Generic<?, ?>[] vector, boolean inverted ){
+    public void sort(Pair<?, ?>[] vector, boolean inverted ){
         if ( inverted ){
             this.invertedSort( vector );
         } else {

@@ -1,6 +1,6 @@
 package sort;
 
-import Estrutura.Generic;
+import Estrutura.Pair;
 
 public class Merge extends Sorter {
 
@@ -10,22 +10,22 @@ public class Merge extends Sorter {
     }
 
     @Override
-    public void sort(Generic<?, ?>[] vector) {
+    public void sort(Pair<?, ?>[] vector) {
         this.vector_size = vector.length;
 
-        Generic<?, ?>[] temp = new Generic<?, ?>[ vector.length ]; this.movements++;
+        Pair<?, ?>[] temp = new Pair<?, ?>[ vector.length ]; this.movements++;
         this.MergeMain( vector, temp, 0, vector.length - 1 );
     }
 
     @Override
-    public void invertedSort(Generic<?, ?>[] vector) {
+    public void invertedSort(Pair<?, ?>[] vector) {
         this.vector_size = vector.length;
 
-        Generic<?, ?>[] temp = new Generic<?, ?>[ vector.length ]; this.movements++;
+        Pair<?, ?>[] temp = new Pair<?, ?>[ vector.length ]; this.movements++;
         this.InvertedMergeMain( vector, temp, 0, vector.length - 1 );
     }
 
-    public void MergeMain( Generic<?, ?>[] vector, Generic<?, ?>[] temp, int left, int right ){
+    public void MergeMain(Pair<?, ?>[] vector, Pair<?, ?>[] temp, int left, int right ){
         int middle;
 
         if ( left < right ){
@@ -37,7 +37,7 @@ public class Merge extends Sorter {
         }
     }
 
-    public void merge( Generic<?, ?>[] vector, Generic<?, ?>[] temp, int leftPosition, int rightPosition, int rightEnd ){
+    public void merge(Pair<?, ?>[] vector, Pair<?, ?>[] temp, int leftPosition, int rightPosition, int rightEnd ){
         int leftEnd = rightPosition - 1; this.movements++;
         int tempPosition = leftPosition; this.movements++;
         int numberElements = rightEnd - leftPosition + 1; this.movements++;
@@ -63,7 +63,7 @@ public class Merge extends Sorter {
         }
     }
 
-    public void InvertedMergeMain( Generic<?, ?>[] vector, Generic<?, ?>[] temp, int left, int right ){
+    public void InvertedMergeMain(Pair<?, ?>[] vector, Pair<?, ?>[] temp, int left, int right ){
         int middle;
 
         if ( left < right ){
@@ -75,7 +75,7 @@ public class Merge extends Sorter {
         }
     }
 
-    public void InvertedMerge( Generic<?, ?>[] vector, Generic<?, ?>[] temp, int leftPosition, int rightPosition, int rightEnd ){
+    public void InvertedMerge(Pair<?, ?>[] vector, Pair<?, ?>[] temp, int leftPosition, int rightPosition, int rightEnd ){
         int leftEnd = rightPosition - 1; this.movements++;
         int tempPosition = leftPosition; this.movements++;
         int numberElements = rightEnd - leftPosition + 1; this.movements++;
