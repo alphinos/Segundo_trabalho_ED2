@@ -1,39 +1,36 @@
-package Estrutura;
+package Primeira_Questao;
 
-public class HashTable<Key, Value> {
-    private final List< Pair<Key, Value> >[] registers;
-    private int size;
+import Estrutura.List;
+import Estrutura.Pair;
+
+public class MultiMap<Key, Value> {
     private final int max_size;
+    private final List< Pair< Key, Value > >[] registers;
 
-    public HashTable( int max_size ){
-        this.registers = new List[ max_size ];
-        this.max_size = max_size;
-        this.size = 0;
+    public MultiMap( int capacity ){
+        this.max_size = capacity;
+        this.registers = new List[ this.max_size ];
     }
 
-    public void insert( Key key, Value value ){
+    public void put( Key key, Value value ){
         int index = hash( key );
         Pair<Key, Value> data = new Pair<>(key, value);
         if ( registers[index] == null ){
             registers[index] = new List<>();
         }
         registers[ index ].insert( data );
-        size++;
     }
 
-    public Pair<Key, Value> query( Key key ){
+    public List< Pair< Key, Value > > findAll( Key key ){
         int index = hash( key );
-        Pair<Key, Value> keyPair = new Pair<>( key, null );
-        return registers[ index ].query( keyPair );
+        return this.registers[ index ];
     }
 
-    public Pair<Key, Value> remove( Key key ){
+    public List< Pair< Key, Value > > removeAll( Key key ){
         int index = hash( key );
-        Pair<Key, Value> keyPair = new Pair<>( key, null );
-        Pair<Key, Value> aux = registers[ index ].remove( keyPair );
-        if ( aux != null )
-            size--;
-        return aux;
+        List< Pair<Key, Value > > allOfKey = this.registers[ index ];
+        this.registers[ index ] = null;
+        return allOfKey;
     }
 
     private int hash( Key key ) {
@@ -55,11 +52,4 @@ public class HashTable<Key, Value> {
         return index;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
 }

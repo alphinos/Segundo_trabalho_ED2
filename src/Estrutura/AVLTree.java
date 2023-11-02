@@ -1,42 +1,42 @@
 package Estrutura;
 
-class AVLNode{
-    private Pair<?,?> data;
+class AVLNode<Key> {
+    private Pair< Key,?> data;
 
-    private AVLNode father;
-    private AVLNode left;
+    private AVLNode<Key> father;
+    private AVLNode<Key> left;
 
-    private AVLNode right;
+    private AVLNode<Key> right;
 
     private int height;
 
-    public AVLNode( Pair<?,?> data ){
+    public AVLNode( Pair<Key,?> data ){
         this.data = data;
         this.father = null;
         this.left = null;
         this.right = null;
     }
 
-    public AVLNode( Object key, Object value ){
+    public AVLNode( Key key, Object value ){
         this.data = new Pair<>( key, value );
         this.father = null;
         this.left = null;
         this.right = null;
     }
 
-    public Pair<?, ?> getData() {
+    public Pair<Key, ?> getData() {
         return this.data;
     }
 
-    public AVLNode getFather() {
+    public AVLNode<Key> getFather() {
         return this.father;
     }
 
-    public AVLNode getLeft() {
+    public AVLNode<Key> getLeft() {
         return this.left;
     }
 
-    public AVLNode getRight() {
+    public AVLNode<Key> getRight() {
         return this.right;
     }
 
@@ -44,20 +44,20 @@ class AVLNode{
         return this.height;
     }
 
-    public void setData(Pair<?, ?> data) {
+    public void setData(Pair<Key, ?> data) {
         this.data = data;
     }
 
-    public void setFather(AVLNode father) {
+    public void setFather(AVLNode<Key> father) {
         this.father = father;
     }
 
-    public void setLeft(AVLNode left) {
+    public void setLeft(AVLNode<Key> left) {
         this.left = left;
         left.setFather( this );
     }
 
-    public void setRight(AVLNode right) {
+    public void setRight(AVLNode<Key> right) {
         this.right = right;
         left.setFather( this );
     }
@@ -67,14 +67,13 @@ class AVLNode{
     }
 }
 
-public class AVLTree {
-    private AVLNode root;
+public class AVLTree<Key> {
+    private AVLNode<Key> root;
 
-    public AVLNode insert( Object key, Object value, AVLNode t ){
-        Pair<?, ?> data = new Pair<>( key, value );
-        AVLNode current = this.root;
+    public AVLNode<Key> insert( Key key, Object value, AVLNode<Key> t ){
+        Pair<Key, ?> data = new Pair<>( key, value );
         if ( t == null ){
-            t = new AVLNode( data );
+            t = new AVLNode<Key>( data );
         } else if ( data.compareTo( t.getData() ) < 0 ) {
             t.setLeft( this.insert( key, value, t ) );
             if ( t.getLeft().getHeight() - t.getRight().getHeight() == 2 ){
@@ -96,9 +95,9 @@ public class AVLTree {
         return t;
     }
 
-    public Pair<?, ?> query(Object key ){
-        Pair<?, ?> data = new Pair<>( key, null );
-        AVLNode current = this.root;
+    public Pair<Key, ?> query( Key key ){
+        Pair<Key, ?> data = new Pair<>( key, null );
+        AVLNode<Key> current = this.root;
         int cmp;
         while ( current != null ){
             cmp = data.compareTo( current.getData() );
@@ -113,14 +112,13 @@ public class AVLTree {
         return null;
     }
 
-    public Pair<?, ?> remove(Object key ){
+    public Pair<Key, ?> remove( Key key ){
         Pair<?, ?> dataKey = new Pair<>( key, null );
-        AVLNode current = this.root;
-        AVLNode father;
+        AVLNode<Key> current = this.root;
+        AVLNode<Key> father;
         int cmp;
 
-        Pair<?, ?> data;
-        Pair<?, ?> data2;
+        Pair<Key, ?> data;
 
         while ( current != null ){
             cmp = dataKey.compareTo( current.getData() );
@@ -164,14 +162,14 @@ public class AVLTree {
         return null;
     }
 
-    public Pair<?, ?> removeGreater(  ){
+    public Pair<Key, ?> removeGreater(  ){
         return this.removeGreater( this.root );
     }
 
-    public Pair<?, ?> removeGreater(AVLNode t ){
-        AVLNode current = t;
-        AVLNode aux;
-        Pair<?, ?> data;
+    public Pair<Key, ?> removeGreater(AVLNode<Key> t ){
+        AVLNode<Key> current = t;
+        AVLNode<Key> aux;
+        Pair<Key, ?> data;
         while ( current != null ){
             if ( current.getRight() != null ){
                 current = current.getRight();
@@ -196,8 +194,8 @@ public class AVLTree {
         return null;
     }
 
-    private AVLNode rightRotation( AVLNode node ){
-        AVLNode leftNode = node.getLeft();
+    private AVLNode<Key> rightRotation( AVLNode<Key> node ){
+        AVLNode<Key> leftNode = node.getLeft();
         node.setLeft( leftNode.getRight() );
         leftNode.setRight( node );
         node.setHeight(
@@ -211,8 +209,8 @@ public class AVLTree {
         return leftNode;
     }
 
-    private AVLNode leftRotation( AVLNode node ){
-        AVLNode rightNode = node.getRight();
+    private AVLNode<Key> leftRotation( AVLNode<Key> node ){
+        AVLNode<Key> rightNode = node.getRight();
         node.setRight( rightNode.getLeft() );
         rightNode.setLeft( node );
         node.setHeight(
@@ -226,12 +224,12 @@ public class AVLTree {
         return rightNode;
     }
 
-    private AVLNode doubleRightRotation( AVLNode node ){
+    private AVLNode<Key> doubleRightRotation( AVLNode<Key> node ){
         node.setLeft( this.leftRotation( node.getLeft() ) );
         return this.rightRotation( node );
     }
 
-    private AVLNode doubleLeftRotation( AVLNode node ){
+    private AVLNode<Key> doubleLeftRotation( AVLNode<Key> node ){
         node.setRight( this.rightRotation( node.getRight() ) );
         return this.rightRotation( node );
     }
