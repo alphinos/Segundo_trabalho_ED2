@@ -113,7 +113,11 @@ public class List<E> {
 
     public void insert( E data ){
         Node<E> newnode = new Node<E>( data );
-        this.last.setNext( newnode );
+        if ( this.last == null ){
+            this.first = newnode;
+        } else {
+            this.last.setNext( newnode );
+        }
         this.last = newnode;
         this.length++;
     }
@@ -159,5 +163,31 @@ public class List<E> {
             this.last = previous;
         this.length--;
         return current.getData();
+    }
+
+    public void printList(  ){
+        System.out.print( "[ " );
+        Node< E > curr = this.first;
+        while ( curr != null ){
+            System.out.print( curr.getData().toString() );
+            if ( curr.getNext() != null )
+                System.out.print( ", " );
+            curr = curr.getNext();
+        }
+        System.out.print( " ]\n" );
+    }
+
+    public String toString(){
+        StringBuilder texto = new StringBuilder("[ ");
+        Node< E > curr = this.first;
+        while ( curr != null ){
+            texto.append(curr.getData().toString());
+            if ( curr.getNext() != null )
+                texto.append( ", " );
+            curr = curr.getNext();
+        }
+        texto.append( " ]" );
+
+        return texto.toString();
     }
 }

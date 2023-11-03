@@ -52,4 +52,32 @@ public class MultiMap<Key, Value> {
         return index;
     }
 
+    public void printMap(  ){
+        System.out.println("{");
+        for ( List<Pair<Key, Value>> register : this.registers ) {
+            if (register != null) {
+                System.out.print("\t");
+                register.printList();
+            } else {
+                System.out.println("\t[  ]");
+            }
+        }
+        System.out.println("}");
+    }
+
+    public String toString(  ){
+        StringBuilder text = new StringBuilder( "{\n" );
+        for ( List<Pair<Key, Value>> register : this.registers ) {
+            if (register != null) {
+                text.append("\t");
+                text.append( register );
+                text.append( "\n" );
+            } else {
+                text.append( "\t[  ]\n" );
+            }
+        }
+        text.append( "}" );
+
+        return text.toString();
+    }
 }
