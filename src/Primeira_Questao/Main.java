@@ -27,6 +27,9 @@ public class Main {
                 map.put( random.nextInt( min, max), random.nextInt( min, max) );
             }
 
+            conteudo.append("Multimapa com tamanho ").append( i )
+                    .append( ".\n\n" );
+
             conteudo.append("Total de atribuições realizadas pelas operações do multimapa: ")
                     .append( map.getAssignments() )
                     .append("\n");
@@ -37,6 +40,7 @@ public class Main {
 
             conteudo.append("Total de elementos no mapa: ")
                     .append( map.getTotalItems() )
+                    .append("\n")
                     .append("\n");
 
             conteudo.append( map );
