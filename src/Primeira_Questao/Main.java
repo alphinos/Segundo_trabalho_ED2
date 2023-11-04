@@ -1,7 +1,6 @@
 package Primeira_Questao;
 
 import Estrutura.Pair;
-import jdk.javadoc.doclet.Reporter;
 
 import java.util.Random;
 
@@ -13,21 +12,37 @@ public class Main {
         int min = 0;
         int max;
 
-        StringBuilder conteudo = new StringBuilder(  );
+        StringBuilder conteudo;
+        MultiMap< Integer, Integer > map;
 
         for ( int i = 10; i <= 1_000_000; i *= 10 ){
 
+            conteudo = new StringBuilder(  );
+
             String path = "./Relatórios/Primeira/" + i + ".txt";
 
-            MultiMap< Integer, Integer > map = new MultiMap<>(i);
+            map = new MultiMap<>(i);
             max = i;
             for ( int j = 0; j < i; j++ ){
                 map.put( random.nextInt( min, max), random.nextInt( min, max) );
             }
 
+            conteudo.append("Total de atribuições realizadas pelas operações do multimapa: ")
+                    .append( map.getAssignments() )
+                    .append("\n");
+
+            conteudo.append("Total de comparações realizadas pelas operações do multimapa: ")
+                    .append( map.getComparisons() )
+                    .append("\n");
+
+            conteudo.append("Total de elementos no mapa: ")
+                    .append( map.getTotalItems() )
+                    .append("\n");
+
             conteudo.append( map );
 
             Report.writeReport( path, conteudo.toString() );
         }
+
     }
 }
