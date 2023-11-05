@@ -1,0 +1,97 @@
+Relatório geral
+
+Trabalho realizado por ANDREI RAMOS LOPES e CARLOS EDUARDO VERAS GOMES
+
+Todas as fontes estão no final deste documento.
+
+Testes
+
+Em geral, os testes realizados e seus resultados estão nos diretórios respectivos de cada questão dentro
+deste diretório "Relatórios".
+
+Quanto aos relatórios da primeira questão, é importante ressaltar que esses foram gerados de forma totalmente
+aleatória e são sobrescritos a cada vez que o método main desta questão é executado.
+
+Quanto aos relatórios da segunda questão, na pasta de documentos estão os arquivos .txt que ficam salvos para
+a busca por plágios. Fora desse diretório, está o arquivo teste.txt que foi escrito por nós de forma totalmente
+arbitrária para encontrar os devidos plágios e ignorar os trechos originais.
+    --> Na pasta de respostas, estão compilados os logs de execução. A seguir, serão discutidas as conclusões.
+
+Conclusões
+
+Primeira questão
+
+De acordo com as nossas pesquisas para entender o que seria um multimapa, chegamos à conclusão de que é, basicamente,
+uma tabela hash que aceita múltiplos valores para cada chave. A partir disso, implementamos uma tabela hash encadeada
+que exige que todas as chaves sejam únicas.
+
+Na prática, foi necessário apenas implementar essa tabela hash encadeada com pequenas modificações e realizar seus
+testes que foram compilados nos relatórios.
+
+Segunda questão
+
+Esta foi a mais extensa e e complicada de ser realizada.
+
+Em essência, a nossa abordagem foi:
+    --> Itera-se sobre cada um dos documentos de base e guarda-se suas palavras num arrayList
+    --> Então, guarda-se cada sequência de palavras de tamanho M iniciada por cada uma das N palavras
+        nas seguintes estruturas: DynamicMultiMap e AdaptedAVLTree, associadas ao seu documento original
+    --> Carrega-se o documento que desejamos identificar os trechos de plágio, separa-se a palavras,
+        contrói-se cada frase de tamanho M e a utilizamos como chave em cada uma das estruturas.
+    --> Se a chave (frase do documento suspeito) for encontrada nas estruturas, significa que achamos
+        o plágio.
+
+Tal ideia funcionou, mas não perfeitamente. Em especial, ao utilizar a DynamicMultiMap, todos os plágios foram
+encontrados, porém a visualização de quais trechos foram copiados não é fácil devido a saltos no retorno das listas
+finais. Já na utilização da AdaptedAVLTree, os plágios foram encontrados, porém não todos, mas, em compensação, a
+visualização dos resultados finais ficou melhor.
+
+Pensando na complexidade assintótica das estruturas, a busca na DynamicMultiMap é de aproximadamente O(nm), na qual
+n é a soma do total de todas as palavras de todos os documento e m o tamanho de cada frase. Como em cada estrutura
+são guardadas as frases e não as palavras, o total de itens guardados é aproximadamente da ordem de n/m. Assim, na
+busca através do hash encadeado, considerando que a distribuição de itens é uniforme, é de aproximadamente n/(mk) -
+onde k é o tamanho do vetor utilizado no hash. Assim, para a DynamicMultiMap, a restrição de complexidade é respeitada.
+Já sobre a AdaptedAVLTree, é importante explicar o seu funcionamento. Essa árvore necessariamentem guarda listas
+encadeadas de pares de chave-valor, assim, como feito no DynamicMultiMap. De forma similar, a busca é de aproximadamente
+O( n log( n/m ) ) que é O( nm ). Estamos considerando essa complexidade porque para cada palavra n do documento,
+realiza-se a operação de busca na árvore que é O( log(n/m) ).
+
+As maiores dificuldades foram a manutenção de todo o código. Construir o programa com base nas nossas ideias e
+pesquisas foi feito relativamente rápido, porém realizar modificações e correções, especialmente em dupla, foi
+desafiador, afinal, os conceitos e ideias nas cabeças de cada um são divergentes.
+
+Fontes:
+
+Ressalva: todos os códigos foram desenvolvidos inteiramente por nós. As fontes em questão foram utilizadas apenas
+para consulta e referência.
+
+Para a construção de todas as estruturas do pacote "Estrutura", foram tomadas de base somente
+os slides disponibilizados no sigaa.
+
+Para a construção da DynamicMultiMap, foram utilziadas as seguintes referências:
+https://github.com/multiformats/multihash#table-for-multihash
+https://stackoverflow.com/questions/4554455/hashtable-with-multiple-values-for-single-key
+https://stackoverflow.com/questions/4557244/hash-table-with-two-keys
+https://richardschneider.github.io/net-ipfs-core/articles/multihash.html
+https://datatracker.ietf.org/doc/draft-multiformats-multihash/
+https://en.wikipedia.org/wiki/Multimap
+
+Para o desenvolvimento da segunda questão:
+http://linguistica.insite.com.br/corpus.php <-- Usado como referência estatística do tamanho de textos.
+https://en.wikipedia.org/wiki/Jaccard_index <-- Primeira ideia para detecção de plágio, porém foi descartada
+https://en.wikipedia.org/wiki/N-gram <-- Sugestão de veteranos
+https://pt.wikipedia.org/wiki/Clube_de_Regatas_do_Flamengo <-- Fonte dos textos utilizados para os documentos
+
+Referências adicionais para compreensão de funcionalidades específicas do java:
+https://www.geeksforgeeks.org/initialize-an-arraylist-in-java/
+https://www.softwaretestinghelp.com/java-arraylist-tutorial/
+https://github.com/Andreirl032/trabalho-1-ed2/blob/main/src/Ord/util/Report.java <-- Referência para construção
+                                                                                     inicial dos relatórios
+https://github.com/alphinos/Park_Manager/blob/main/src/Files/FCliente.java <-- Referência para arquivos
+https://www.devmedia.com.br/a-classe-stringbuilder-em-java/25609
+https://web.fe.up.pt/~ee96100/projecto/Tabela%20ascii.htm
+https://stackoverflow.com/questions/8896758/initial-size-for-the-arraylist
+https://howtodoinjava.com/java/collections/arraylist/arraylist-length-size/
+https://www.javatpoint.com/when-to-use-arraylist-and-linkedlist-in-java  <-- Dúvida sobre complexidade do
+                                                                             arraylist
+https://greenido.wordpress.com/2022/09/09/regex-101/ <-- Regex para arquivos

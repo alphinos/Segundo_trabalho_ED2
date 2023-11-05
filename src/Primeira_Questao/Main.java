@@ -23,26 +23,36 @@ public class Main {
         return x;
     }
 
-    public static String checkBigO(int n, int comparisons){
-        double constant,log,linear,log_linear,quadratic,cubic,base_two_exponential,factorial;
-        constant=1;
-        log=Math.log(n)/Math.log(2);// DALLYSON VAI TOMAR NO JAVA
-        linear=n;
-        log_linear=log*linear;
-        quadratic=n*n;
-        cubic=n*n*n;
-        base_two_exponential=Math.pow(2,n);
-        factorial=n;
-        for(int i=n-1;i>1;i--){
+    public static String checkBigO(long n, long comparisons){
+        LinkedHashMap<String,Double> big_o = new LinkedHashMap<>();
+        String []keys = {"O(1)","O(log n)","O(n)","O(n.log n)","O(n^2)","O(n^3)","O(2^n)","O(n!)"};
+        big_o.put("O(1)", Double.valueOf(1));
+        big_o.put("O(log n)",Math.log(n)/Math.log(2));
+        big_o.put("O(n)",Double.valueOf(n));
+        big_o.put("O(n.log n)",Double.valueOf(n*(Math.log(n)/Math.log(2))));
+        big_o.put("O(n^2)",Double.valueOf(n*n));
+        big_o.put("O(n^3)",Double.valueOf(n*n*n));
+        big_o.put("O(2^n)",Math.pow(2,n));
+        double factorial=n;
+        for(long i=n-1;i>1;i--){
             factorial*=i;
         }
+        big_o.put("O(n!)",factorial);
 
-        double min_distance=module((double)1-comparisons);
-        if(module((double)log_linear-comparisons)<min_distance){
-            min_distance=module((double)log_linear-comparisons);
+        String big_o_key="O(1)";
+        double min_distance=module(big_o.get(big_o_key)-comparisons);
+        for(String k:keys){
+            if(min_distance>module(big_o.get(k)-comparisons)){
+            min_distance=module(big_o.get(k)-comparisons);
+            big_o_key=k;
+            }
         }
-        //DEPOIS CONTINUO ESSA LÓGICA!
-        return "a";
+        System.out.println(big_o_key);
+        System.out.println(min_distance);
+        System.out.println(big_o.get(big_o_key));
+        System.out.println(comparisons);
+
+        return String.format("A complexidade na notação big O é de %s:", big_o_key);
     }
 
     public static void main( String[] args ){
@@ -82,6 +92,10 @@ public class Main {
                     .append("\n")
                     .append("\n");
 
+            conteudo.append(checkBigO(map.getTotalItems(),map.getComparisons()))
+                    .append("\n")
+                    .append("\n");
+
             conteudo.append( map );
 
 //            Report.writeReport( path, conteudo.toString() );
@@ -97,11 +111,6 @@ public class Main {
                         .append("\n");
             }
 
-//            conteudo.append( map );
-
-//            Report.writeReport( path, conteudo.toString() );
-
-
 
 //REMOVER
 
@@ -110,20 +119,6 @@ public class Main {
             conteudo.append("Multimapa com tamanho ").append( i )
                     .append( ".\n\n" );
 
-            conteudo.append("Total de atribuições realizadas pelas operações do multimapa: ")
-                    .append( map.getAssignments() )
-                    .append("\n");
-
-            conteudo.append("Total de comparações realizadas pelas operações do multimapa: ")
-                    .append( map.getComparisons() )
-                    .append("\n");
-
-            conteudo.append("Total de elementos no mapa: ")
-                    .append( map.getTotalItems() )
-                    .append("\n")
-                    .append("\n");
-
-//            conteudo.append( map );
             for ( int j = 0; j < i; j++ ){
                 if(j%2==0 && map.findAll(j)!=null){
                 map.removeAll( j );
