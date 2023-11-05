@@ -16,7 +16,18 @@ public class ReadAndSeparateTxt {
         while (linha != null) {
             System.out.println(linha);
             String[] temp = linha.split("\\s+");
-            allWords.addAll(Arrays.asList(temp));
+
+            for (String palavra : temp) {
+                // Remover qualquer pontuação no final da palavra (pode ser personalizado)
+                palavra = palavra.replaceAll("[^a-zA-Z0-9]", "");
+
+                // Verificar se a palavra não está vazia
+                if (!palavra.isEmpty()) {
+                    allWords.add(palavra);
+                }
+            }
+
+//            allWords.addAll(Arrays.asList(temp));
             linha = buffRead.readLine();
         }
         buffRead.close();

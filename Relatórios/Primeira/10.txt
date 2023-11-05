@@ -8,22 +8,64 @@ Free memory (bytes): 122
 Maximum memory (bytes): 1966
 Total memory available to JVM (bytes): 126
 physicalMemorySize: 7
-freePhysicalMemory: 658
+freePhysicalMemory: 324
 
 Este relatório foi gerado pelo computador de Carlos Veras
+
+INSERÇÃO NO MULTIMAPA .
+
+Multimapa com tamanho 10.
 
 Total de atribuições realizadas pelas operações do multimapa: 57
 Total de comparações realizadas pelas operações do multimapa: 17
 Total de elementos no mapa: 10
+
 {
-	[ { 0 : 6 } ]
+	[ { 0 : 3 } ]
 	[  ]
-	[ { 2 : 7 } ]
-	[ { 3 : 0 }, { 3 : 8 } ]
-	[ { 4 : 7 } ]
-	[ { 5 : 4 } ]
+	[ { 2 : 3 }, { 2 : 8 } ]
+	[ { 3 : 3 } ]
+	[ { 4 : 0 } ]
+	[ { 5 : 7 } ]
+	[ { 6 : 2 } ]
+	[ { 7 : 2 }, { 7 : 9 }, { 7 : 1 } ]
 	[  ]
-	[ { 7 : 1 }, { 7 : 5 } ]
 	[  ]
-	[ { 9 : 5 }, { 9 : 7 } ]
+}
+
+BUSCA NO MULTIMAPA .
+
+Multimapa com tamanho 10.
+
+[ { 0 : 3 } ]
+[ ]
+[ { 2 : 3 }, { 2 : 8 } ]
+[ { 3 : 3 } ]
+[ { 4 : 0 } ]
+[ { 5 : 7 } ]
+[ { 6 : 2 } ]
+[ { 7 : 2 }, { 7 : 9 }, { 7 : 1 } ]
+[ ]
+[ ]
+
+
+REMOÇÃO DAS CHAVES PARES COM VALORES EXISTENTES NO MULTIMAPA .
+
+Multimapa com tamanho 10.
+
+Total de atribuições realizadas pelas operações do multimapa: 125
+Total de comparações realizadas pelas operações do multimapa: 34
+Total de elementos no mapa: 10
+
+{
+	[  ]
+	[  ]
+	[  ]
+	[ { 3 : 3 } ]
+	[  ]
+	[ { 5 : 7 } ]
+	[  ]
+	[ { 7 : 2 }, { 7 : 9 }, { 7 : 1 } ]
+	[  ]
+	[  ]
 }

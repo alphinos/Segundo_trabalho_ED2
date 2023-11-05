@@ -44,6 +44,17 @@ class AVLNode<Key> {
         return this.height;
     }
 
+    public int getHeight( AVLNode<Key> side ){
+        if ( side == null )
+            return 0;
+        int heightLeft = this.getHeight( side.left );
+        int heightRight = this.getHeight( side.right );
+        if ( heightRight > heightLeft )
+            return 1 + heightRight;
+        else
+            return 1 + heightLeft;
+    }
+
     public void setData(Pair<Key, ?> data) {
         this.data = data;
     }
@@ -70,6 +81,9 @@ class AVLNode<Key> {
 public class AVLTree<Key> {
     private AVLNode<Key> root;
 
+    public AVLNode<Key> insert( Key key, Object value ){
+        return this.insert( key, value, this.root );
+    }
     public AVLNode<Key> insert( Key key, Object value, AVLNode<Key> t ){
         Pair<Key, ?> data = new Pair<>( key, value );
         if ( t == null ){
@@ -91,7 +105,7 @@ public class AVLTree<Key> {
                     t = rightRotation( t );
             }
         }
-        t.setHeight( Math.max( t.getLeft().getHeight(), t.getRight().getHeight() ) + 1 );
+        t.setHeight( Math.max( t.getHeight( t.getLeft() ), t.getHeight( t.getRight() ) ) + 1 );
         return t;
     }
 

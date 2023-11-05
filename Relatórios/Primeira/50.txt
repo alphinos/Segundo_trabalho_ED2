@@ -1,0 +1,191 @@
+The information about OS
+Current username: alphinos
+Name of the OS: Linux
+Version of the OS: 6.1.55-1-MANJARO
+Architecture of THe OS: amd64
+Available processors (cores): 4
+Free memory (bytes): 121
+Maximum memory (bytes): 1966
+Total memory available to JVM (bytes): 126
+physicalMemorySize: 7
+freePhysicalMemory: 323
+
+Este relatório foi gerado pelo computador de Carlos Veras
+
+INSERÇÃO NO MULTIMAPA .
+
+Multimapa com tamanho 50.
+
+Total de atribuições realizadas pelas operações do multimapa: 280
+Total de comparações realizadas pelas operações do multimapa: 80
+Total de elementos no mapa: 50
+
+{
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 4 : 49 }, { 4 : 4 } ]
+	[ { 5 : 45 } ]
+	[  ]
+	[ { 7 : 6 } ]
+	[  ]
+	[ { 9 : 47 }, { 9 : 31 } ]
+	[ { 10 : 38 }, { 10 : 0 }, { 10 : 35 } ]
+	[ { 11 : 46 } ]
+	[ { 12 : 1 } ]
+	[  ]
+	[ { 14 : 20 } ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 18 : 30 }, { 18 : 24 }, { 18 : 0 } ]
+	[ { 19 : 32 } ]
+	[ { 20 : 46 } ]
+	[ { 21 : 22 } ]
+	[ { 22 : 18 } ]
+	[  ]
+	[  ]
+	[ { 25 : 11 }, { 25 : 41 }, { 25 : 17 } ]
+	[  ]
+	[ { 27 : 45 }, { 27 : 28 }, { 27 : 3 } ]
+	[  ]
+	[ { 29 : 5 }, { 29 : 22 }, { 29 : 7 } ]
+	[ { 30 : 31 } ]
+	[  ]
+	[ { 32 : 15 }, { 32 : 27 } ]
+	[  ]
+	[  ]
+	[ { 35 : 4 } ]
+	[ { 36 : 1 }, { 36 : 36 }, { 36 : 3 } ]
+	[ { 37 : 31 } ]
+	[  ]
+	[ { 39 : 14 }, { 39 : 39 }, { 39 : 5 } ]
+	[  ]
+	[ { 41 : 42 } ]
+	[ { 42 : 18 }, { 42 : 10 } ]
+	[ { 43 : 23 } ]
+	[ { 44 : 12 } ]
+	[  ]
+	[ { 46 : 19 }, { 46 : 17 }, { 46 : 14 } ]
+	[ { 47 : 0 } ]
+	[ { 48 : 43 } ]
+	[ { 49 : 1 } ]
+}
+
+BUSCA NO MULTIMAPA .
+
+Multimapa com tamanho 50.
+
+[ ]
+[ ]
+[ ]
+[ ]
+[ { 4 : 49 }, { 4 : 4 } ]
+[ { 5 : 45 } ]
+[ ]
+[ { 7 : 6 } ]
+[ ]
+[ { 9 : 47 }, { 9 : 31 } ]
+[ { 10 : 38 }, { 10 : 0 }, { 10 : 35 } ]
+[ { 11 : 46 } ]
+[ { 12 : 1 } ]
+[ ]
+[ { 14 : 20 } ]
+[ ]
+[ ]
+[ ]
+[ { 18 : 30 }, { 18 : 24 }, { 18 : 0 } ]
+[ { 19 : 32 } ]
+[ { 20 : 46 } ]
+[ { 21 : 22 } ]
+[ { 22 : 18 } ]
+[ ]
+[ ]
+[ { 25 : 11 }, { 25 : 41 }, { 25 : 17 } ]
+[ ]
+[ { 27 : 45 }, { 27 : 28 }, { 27 : 3 } ]
+[ ]
+[ { 29 : 5 }, { 29 : 22 }, { 29 : 7 } ]
+[ { 30 : 31 } ]
+[ ]
+[ { 32 : 15 }, { 32 : 27 } ]
+[ ]
+[ ]
+[ { 35 : 4 } ]
+[ { 36 : 1 }, { 36 : 36 }, { 36 : 3 } ]
+[ { 37 : 31 } ]
+[ ]
+[ { 39 : 14 }, { 39 : 39 }, { 39 : 5 } ]
+[ ]
+[ { 41 : 42 } ]
+[ { 42 : 18 }, { 42 : 10 } ]
+[ { 43 : 23 } ]
+[ { 44 : 12 } ]
+[ ]
+[ { 46 : 19 }, { 46 : 17 }, { 46 : 14 } ]
+[ { 47 : 0 } ]
+[ { 48 : 43 } ]
+[ { 49 : 1 } ]
+
+
+REMOÇÃO DAS CHAVES PARES COM VALORES EXISTENTES NO MULTIMAPA .
+
+Multimapa com tamanho 50.
+
+Total de atribuições realizadas pelas operações do multimapa: 600
+Total de comparações realizadas pelas operações do multimapa: 160
+Total de elementos no mapa: 50
+
+{
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 5 : 45 } ]
+	[  ]
+	[ { 7 : 6 } ]
+	[  ]
+	[ { 9 : 47 }, { 9 : 31 } ]
+	[  ]
+	[ { 11 : 46 } ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 19 : 32 } ]
+	[  ]
+	[ { 21 : 22 } ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 25 : 11 }, { 25 : 41 }, { 25 : 17 } ]
+	[  ]
+	[ { 27 : 45 }, { 27 : 28 }, { 27 : 3 } ]
+	[  ]
+	[ { 29 : 5 }, { 29 : 22 }, { 29 : 7 } ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 35 : 4 } ]
+	[  ]
+	[ { 37 : 31 } ]
+	[  ]
+	[ { 39 : 14 }, { 39 : 39 }, { 39 : 5 } ]
+	[  ]
+	[ { 41 : 42 } ]
+	[  ]
+	[ { 43 : 23 } ]
+	[  ]
+	[  ]
+	[  ]
+	[ { 47 : 0 } ]
+	[  ]
+	[ { 49 : 1 } ]
+}

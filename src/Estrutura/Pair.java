@@ -49,4 +49,24 @@ public class Pair<Key, Value> implements Comparable<Pair<?, ?>> { // Fonte: http
         }
 
     }
+
+    public int compareTo(Pair<?, ?> o, boolean value) {
+        if ( value == false )
+            return this.compareTo( o );
+        // Teste do tipo do valor object
+        if (this.value instanceof Integer && o.getValue() instanceof  Integer ) {
+            return ((Integer) this.value).compareTo((Integer) o.getValue() );
+        } else if (this.value instanceof Double && o.getValue() instanceof  Double) {
+            return ((Double) this.value).compareTo((Double) o.getValue());
+        } else if ( this.value instanceof  String && o.getValue() instanceof  String ){
+            return ((String) this.value).compareTo((String) o.getValue() );
+        } else {
+            try {
+                throw new Exception( "Type not accepted" );
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+    }
 }

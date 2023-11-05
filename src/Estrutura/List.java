@@ -1,5 +1,8 @@
 package Estrutura;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 class Node<E> {
     private Node<E> previous;
     private E data;
@@ -161,6 +164,25 @@ public class List<E> {
         return null;
     }
 
+    public E query( E key, boolean byValue ) {
+        if ( byValue == false )
+            return this.query( key );
+        Pair<?, ?> aux = new Pair<>( key, null );               this.assignments++;
+        Node<E> current = this.first;                           this.assignments++;
+        Pair<?, ?> curr;                                        this.assignments++;
+        while( current != null ){                               this.comparisons++; this.comparisons++;
+            if ( current.getData() instanceof Pair<?,?> )
+                curr = ( Pair<?, ?> )current.getData();
+            else
+                curr = new Pair<>(current.getData(), null);
+            this.assignments++; this.comparisons++;
+            if ( curr.compareTo( aux, true ) == 0 )
+                return current.getData();
+            current = current.getNext();                        this.assignments++;
+        }
+        return null;
+    }
+
     public E remove( E key ){
         Pair<?, ?> aux = new Pair<>( key, null );               this.assignments++;
         Node<E> current = this.first;                           this.assignments++;
@@ -194,6 +216,16 @@ public class List<E> {
 
     public void printList(  ){
         System.out.println( this );
+    }
+
+    public ArrayList<E> toArray(){
+        ArrayList<E> arr = new ArrayList<>(  );
+        Node<E> curr = this.first;
+        while ( curr != null ){
+            arr.add( curr.getData() );
+            curr = curr.getNext();
+        }
+        return arr;
     }
 
     public String toString(){
