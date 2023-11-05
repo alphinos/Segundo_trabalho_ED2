@@ -65,6 +65,8 @@ public class DynamicMultiMap<Key, Value> {
         if ( index >= this.registers.size() )
             this.registers = this.reallocateMap();
 
+        index = hash( key );
+
         Pair<Key, Value> data = new Pair<>(key, value);                 this.assignments++;
         if ( !this.registers.isEmpty()
                 && this.registers.get(index) == null ){                 this.comparisons++;

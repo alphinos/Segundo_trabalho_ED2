@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 public class Report {
 
-    public static void writeReport( String path, String conteudo ){
+    public static void writeReport( String path, String[] content ){
         File file = new File( path );
 
         if ( file.exists() ){
@@ -17,7 +17,10 @@ public class Report {
                 if ( file.canWrite() ){
                     PrintWriter output = new PrintWriter( file );
                     output.println( soft_hard_content() + "\n" );
-                    output.println( conteudo );
+
+                    for ( String page : content )
+                        output.println( page );
+
                     output.close();
                 }
             } catch (FileNotFoundException ex ) {
@@ -28,7 +31,8 @@ public class Report {
                 if ( file.createNewFile() && file.canWrite() ){
                     PrintWriter output = new PrintWriter( file );
                     output.println( soft_hard_content() + "\n" );
-                    output.println( conteudo );
+                    for ( String page : content )
+                        output.println( page );
                     output.close();
                 }
             }  catch ( IOException ex ) {
